@@ -1,0 +1,2 @@
+Type	m	features
+Common	-	src_ip, dst_ip, src_port, dst_port, protocol, packet_count, total_bytes, tcp_flags

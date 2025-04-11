@@ -1,0 +1,41 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Network Traffic Analysis</title>
+    <link rel="stylesheet" href="./static/style.css">
+</head>
+<body>
+    <h1>Network Traffic Analysis</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <label for="file">Upload a PCAP file:</label>
+        <input type="file" id="file" name="file" accept=".pcap">
+        <input type="submit" value="Analyze">
+    </form>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="error">
+                {% for message in messages %}
+                    {{ message }}<br>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    {% if result is not none %}
+        <div class="result">
+            <h2>Analysis Result</h2>
+            <p><strong>Detection Result:</strong> 
+                {% if result == "Botnet Detected" %}
+                    <span class="detected">{{ result }}</span>
+                {% else %}
+                    <span class="not-detected">{{ result }}</span>
+                {% endif %}
+            </p>
+            <p><strong>Features Used:</strong> {{ features }}</p>
+        </div>
+    {% endif %}
+</body>
+</html>
